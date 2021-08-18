@@ -21,7 +21,7 @@ class FirstScr(Screen):
         btn.pos = (720,0)
         label.add_widget(btn) # экран - это виджет, на котором могут создаваться все другие (потомки)
 
-        txt = Label(text = '**стук в дверь** Откройте ,Полиция')
+        txt = Label(text = '**стук в дверь** Откройте ,полиция')
         txt.pos = (300,400)
         label.add_widget(txt)
         self.popit = Popup(content=Label(text=''),
@@ -208,11 +208,38 @@ class SeventhScr(Screen):
         self.add_widget(label)
     def next(self):
         self.manager.transition.direction = 'left'
+        self.manager.current = 'Isdelal'
+#УБИЛ ФУУУУ
+    def remove(self):
+        self.manager.transition.direction = 'right'
+        self.manager.current = 'Fivth'      
+class SdelalScr(Screen):
+    def __init__(self, name='Isdelal'):
+        super().__init__(name=name)
+        label = Widget()
+        btn = Button(text="Вернуться",size_hint = (None,None))
+        btn1 = Button(text="Далее",size_hint = (None,None))
+        btn.on_press = self.next
+        btn.size = (30,30)
+        btn1.size = (30,30)
+        btn.on_press = self.remove
+        btn1.on_press = self.next
+        label.add_widget(btn)
+        label.add_widget(btn1)
+        btn1.pos = (720,0)
+        btn.pos = (120,0)
+
+        txt = Label(text = 'я никого не убивал!')
+        txt.pos = (300,400)
+        label.add_widget(txt)
+        self.add_widget(label)
+    def next(self):
+        self.manager.transition.direction = 'left'
         self.manager.current = 'Sixth'
 
     def remove(self):
         self.manager.transition.direction = 'right'
-        self.manager.current = 'Fivth'      
+        self.manager.current = 'Fivth'
 
 class MyApp(App):
     def build(self):
@@ -224,6 +251,7 @@ class MyApp(App):
         sm.add_widget(FivthScr())
         sm.add_widget(SixthScr())
         sm.add_widget(SeventhScr())
+        sm.add_widget(SdelalScr())
         # будет показан FirstScr, потому что он добавлен первым. Это можно поменять вот так:
         # sm.current = 'second'
 
